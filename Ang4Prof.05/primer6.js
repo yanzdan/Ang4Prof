@@ -1,49 +1,24 @@
-//let myData = new Object();
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var MyClass = (function () {
-    function MyClass(name, weather) {
-        this.name = name;
-        this._weather = weather;
-    }
-    Object.defineProperty(MyClass.prototype, "weather", {
-        get: function () {
-            return this._weather;
-        },
-        set: function (value) {
-            this._weather = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    MyClass.prototype.printMessages = function (newname) {
-        if (newname === void 0) { newname = ""; }
-        console.log("Hello3 " + ((newname == "") ? this.name : newname) + ".");
-        console.log("Today is " + this.weather + ".");
-    };
-    return MyClass;
-}());
-var MySubClass = (function (_super) {
-    __extends(MySubClass, _super);
-    function MySubClass(name, weather, city) {
-        _super.call(this, name, weather);
-        this.city = city;
-    }
-    MySubClass.prototype.printMessages = function () {
-        _super.prototype.printMessages.call(this);
-        console.log("You are in " + this.city);
-    };
-    return MySubClass;
-}(MyClass));
-var AdamData = new MyClass("Adam", "sunny");
-var EvaData = new MyClass("Eva", "rain");
-console.log("--------- call A");
-AdamData.printMessages();
-console.log("--------- call E");
-EvaData.printMessages();
-var JohnData = new MySubClass("John", "cloudly", "London");
-console.log("--------- call J");
-JohnData.printMessages();
+"use strict";
+var NameAndWeather_1 = require("./modules/NameAndWeather");
+var TempConverter_1 = require("./modules/TempConverter");
+var name = new NameAndWeather_1.Name("Adam", "Freeman");
+var loc = new NameAndWeather_1.WeatherLocation("raining", "London");
+console.clear();
+console.log("Getter==" + name.nameMessage);
+console.log("Method==" + loc.fnWeatherMessage());
+var cities = {};
+cities["London"] = ["raining", TempConverter_1.TempConverter.convertFtoC("38")];
+cities["Paris"] = ["sunny", TempConverter_1.TempConverter.convertFtoC("52")];
+cities["Berlin"] = ["snowing", TempConverter_1.TempConverter.convertFtoC("23")];
+for (var key in cities) {
+    console.log(key + ": " + cities[key][0] + ", " + cities[key][1]);
+}
+//let citearray = new Array();
+// let citearray: [[string, string]] = [];
+var citearray = [];
+citearray.push(["raining", TempConverter_1.TempConverter.convertFtoC("38")]);
+citearray.push(["sunny", TempConverter_1.TempConverter.convertFtoC("52")]);
+citearray.push(["snowing", TempConverter_1.TempConverter.convertFtoC("23")]);
+for (var key in citearray) {
+    console.log(key + ": " + citearray[key][0] + ", " + citearray[key][1]);
+}
