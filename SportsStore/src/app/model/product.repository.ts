@@ -10,12 +10,14 @@ export class ProductRepository {
     dataSource.getProducts().subscribe(data => {
       this.products = data;
       this.categories = data.map(p => p.category)
-        .filter((c, index, array) => array.indexOf(c) == index).sort();
+        .filter((c, index, array) => {
+          return array.indexOf(c) === index;
+        }).sort();
     });
   }
   getProducts(aProductCategory: string = null): Product[] {
     return this.products
-      .filter(p => aProductCategory == null || aProductCategory == p.category);
+      .filter(p => aProductCategory == null || aProductCategory === p.category);
   }
   getProduct(aProductId: number): Product {
     return this.products.find(p => p.id == aProductId);
