@@ -17,7 +17,8 @@ btn-block"
   <div *ngFor="let product of products" class="card card-outline-primary">
     <h4 class="card-header" >
       {{product.name}}
-      <span class="pull-xs-right tag tag-pill tag-primary">{{ product.price | currency:"USD":true:"2.2-2" }}</span>
+      <!--"code", "symbol" or "symbol-narrow" -->
+      <span class="pull-xs-right tag tag-pill tag-primary">{{ product.price | currency:"USD": null :"2.2-2" }}</span>
     </h4>
     <div class="card-text p-a-1">{{product.description}}</div>
   </div>
@@ -33,7 +34,13 @@ btn-block"
   </div>
 
   <div class="btn-group pull-xs-right">
-    <button *ngFor="let page of pageNumbers" (click)="changePage(page)"
+    <!--
+    <button *ngFor="let page of pageNumbers" (click)="selectedPage = page"
+            class="btn btn-outline-primary" [class.active]="page == selectedPage">
+      {{page}}
+    </button>
+    -->
+    <button *counter="let page of pageCount" (click)="selectedPage = page"
             class="btn btn-outline-primary" [class.active]="page == selectedPage">
       {{page}}
     </button>
